@@ -180,7 +180,7 @@ You will also need accounts for:
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/justin-theodorus/artmatch
 cd pinus-hack
 ```
 
