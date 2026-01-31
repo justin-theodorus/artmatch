@@ -2,7 +2,7 @@
 
 ArtMatch is a React Native mobile application that revolutionizes art discovery through AI-powered recommendations, a Tinder-style swipe interface, AR preview capabilities, and a conversational art advisory powered by Claude AI.
 
-![Logo](assets/Artmatch%20logo.png)
+![Logo](assets/ArtMatch%20logo.png)
 
 ## Table of Contents
 
