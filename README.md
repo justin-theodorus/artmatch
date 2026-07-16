@@ -509,6 +509,18 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Webhook Alerts for Gallery Price Drops
+
+You can trigger a webhook alert for price drops in a gallery by calling:
+
+```
+POST /api/galleries/{gallery_id}/price-drop-alert?threshold=YOUR_PRICE&webhook_url=YOUR_WEBHOOK_URL
+```
+- `threshold`: Price threshold (required, integer)
+- `webhook_url`: Optional override for the webhook destination
+
+If any artwork in the gallery is at or below the threshold, a webhook POST will be sent with details of the artworks.
+
 ## Future Enhancements
 
 - Secondary marketplace for user-to-user artwork sales

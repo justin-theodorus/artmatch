@@ -3,6 +3,8 @@ from typing import List, Optional
 from models.schemas import Gallery, Artwork
 from services.supabase_client import get_supabase_client
 from collections import Counter
+from fastapi import BackgroundTasks
+from services.webhook_alerts import check_and_alert_price_drops
 
 router = APIRouter(prefix='/galleries', tags=['galleries'])
 
@@ -107,6 +109,20 @@ async def get_gallery(gallery_id: str):
         raise HTTPException(status_code=404, detail='Gallery not found')
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post('/{gallery_id}/price-drop-alert')
+async def trigger_price_drop_alert(
+    gallery_id: str,
+    threshold: int,
+    background_tasks: BackgroundTasks,
+    webhook_url: Optional[str] = None
+):
+    """
+    Trigger a webhook alert if any artwork in the gallery is below the threshold price.
+    """
+    background_tasks.add_task(check_and_alert_price_drops, gallery_id, threshold, webhook_url)
+    return {"status": "alert task started"}
 
 
 @router.get('/{gallery_id}/artworks', response_model=List[Artwork])
